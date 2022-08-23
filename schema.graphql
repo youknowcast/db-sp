@@ -1,0 +1,75 @@
+type Order {
+	code: String!
+	date: Date!
+	customer: Customer!
+	details: [OrderDetail!]!
+}
+
+type Customer {
+	code: String!
+	name: String!
+	address: String
+	phoneNumber: String
+	staff: Staff!
+}
+
+type OrderDetail {
+	# sequence 昇順で返却
+	sequence: Integer!
+	goods: Goods!
+	quantity: Int!
+}
+
+type Goods {
+	code: String!
+	name: String!
+	price: Int!
+	stocks: [GoodsStock!]!
+}
+
+type Staff {
+	code: String!
+	name: String!
+}
+
+type GoodsStock {
+	depot: Depot!
+	quantity: Int!
+}
+
+type Depot {
+	code: String!
+	name: String!
+}
+
+scaler Date
+
+type CreateOrderResult = Order! | InvalidOrderInputError!
+
+type InvalidOrderInputError {
+	description: String!
+}
+
+input OrderInput {
+	date: Date!
+	customerCode: String!
+	details: [OrderDetailInput!]!
+}
+
+input OrderDetailInput {
+	goodsCode: String!
+	quantity: Int!
+}
+
+type Query {
+	allOrders: [Order!]!
+}
+
+type Mutation {
+	createOrder(input: OrderInput!): CreateOrderResult!
+}
+
+schema {
+	query: Query
+	mutation: Mutation
+}
