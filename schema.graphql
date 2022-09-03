@@ -44,7 +44,7 @@ type Depot {
 
 scaler Date
 
-type CreateOrderResult = Order! | InvalidOrderInputError!
+union CreateOrderResult = Order | InvalidOrderInputError
 
 type InvalidOrderInputError {
 	description: String!
@@ -63,6 +63,7 @@ input OrderDetailInput {
 
 type Query {
 	allOrders: [Order!]!
+	allCustomers: [Customer!]!
 }
 
 type Mutation {

@@ -14,3 +14,9 @@ apply schema
 ```
 % ridgepole -c config.yml -f Schemafile -a
 ```
+
+db
+
+```
+% sqlite3 db.sqlite3
+```
